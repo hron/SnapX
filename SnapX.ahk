@@ -60,11 +60,11 @@ SetWorkingDir %A_ScriptDir%  ; Ensures a consistent starting directory.
 
 Tray.initIcon()
 
-if not A_IsAdmin
-{
-	Run *RunAs "%A_ScriptFullPath%"
-	ExitApp
-}
+;if not A_IsAdmin
+;{
+;	Run *RunAs "%A_ScriptFullPath%"
+;	ExitApp
+;}
 
 SoundPlay *64
 TrayTip, % Settings.programTitle, Loaded
@@ -85,26 +85,26 @@ tray := new Tray(settings, Build, updateChecker, snapper)
 #MaxThreadsBuffer On
 
 ; horizontal sizing and direction
-#Left::snapper.moveWindow(0, -1, 0, 0, 0)  ; move left
-#!Left::snapper.moveWindow(0, -1, 0, 0, 0) ; move left
-#Right::snapper.moveWindow(0, 1, 0, 0, 0)  ; move right
-#!Right::snapper.moveWindow(0, 1, 0, 0, 0) ; move right
-#Up::snapper.moveWindow(0, 0, 1, 0, 0)     ; increase width
-#Down::snapper.moveWindow(0, 0, -1, 0, 0)  ; decrease width
+#u::snapper.moveWindow(0, -1, 0, 0, 0)  ; move left
+#!u::snapper.moveWindow(0, -1, 0, 0, 0) ; move left
+#o::snapper.moveWindow(0, 1, 0, 0, 0)  ; move right
+#!o::snapper.moveWindow(0, 1, 0, 0, 0) ; move right
+#8::snapper.moveWindow(0, 0, 1, 0, 0)     ; increase width
+#i::snapper.moveWindow(0, 0, -1, 0, 0)  ; decrease width
 
 ; vertical sizing and direction
-#!Up::snapper.moveWindow(0, 0, 0, -1, 0)   ; move up
-#!Down::snapper.moveWindow(0, 0, 0, 1, 0)  ; move down
-#PgUp::snapper.moveWindow(0, 0, 0, 0, 1)   ; size height toward top
-#PgDn::snapper.moveWindow(0, 0, 0, 0, -1)  ; size height toward bottom
+#!8::snapper.moveWindow(0, 0, 0, -1, 0)   ; move up
+#!i::snapper.moveWindow(0, 0, 0, 1, 0)  ; move down
+#0::snapper.moveWindow(0, 0, 0, 0, 1)   ; size height toward top
+#p::snapper.moveWindow(0, 0, 0, 0, -1)  ; size height toward bottom
 
 ; movement between multiple monitors
 ; 	sleep allows time for Windows to do the movement to the new monitor before we re-snap according to the new monitor's width/height
-~#+Left::
+~#+u::
 	Sleep, 10
 	snapper.moveWindow(0, 0, 0, 0, 0)
 	return
-~#+Right::
+~#+o::
 	Sleep, 10
 	snapper.moveWindow(0, 0, 0, 0, 0)
 	return
